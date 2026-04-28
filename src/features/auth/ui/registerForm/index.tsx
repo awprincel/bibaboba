@@ -4,8 +4,9 @@ import { RegisterSchema, type TRegisterSchema } from "../../model/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterMutation } from "../../../../entities/auth/api/authApi";
 import { useNavigate } from "react-router";
-import { setAuth } from "../../../../entities/auth/api/authSlice";
+import styles from './index.module.scss'
 import { useAppDispatch } from "../../../../app/provider/store/hooks";
+import { setAuth } from "../../../../entities/auth/api/authSlice";
 
 export const RegisterForm = () => {
   const [apiRegister] = useRegisterMutation();
@@ -39,32 +40,45 @@ export const RegisterForm = () => {
     }
   };
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Регистрация</h1>
+return (
+    <div className={styles["auth-container"]}>
+      <form className={styles["auth-form"]} onSubmit={handleSubmit(onSubmit)}>
+        <h1 className={styles["auth-form__title"]}>Регистрация</h1>
 
-        <label>
-          Username
-          <input type="text" {...register("name")} />
-          {errors.name && <div className="error">{errors.name.message}</div>}
-        </label>
+        <div className={styles["auth-form__group"]}>
+          <label className={styles["auth-form__label"]}>Имя пользователя</label>
+          <input 
+            type="text" 
+            className={`${styles["auth-form__input"]} ${errors.name ? styles["auth-form__input--error"] : ""}`}
+            {...register("name")} 
+            placeholder="Ivan Ivanov"
+          />
+          {errors.name && <span className={styles["auth-form__error"]}>{errors.name.message}</span>}
+        </div>
 
-        <label>
-          Email
-          <input type="text" {...register("email")} />
-          {errors.email && <div className="error">{errors.email.message}</div>}
-        </label>
+        <div className={styles["auth-form__group"]}>
+          <label className={styles["auth-form__label"]}>Email</label>
+          <input 
+            type="email" 
+            className={`${styles["auth-form__input"]} ${errors.email ? styles["auth-form__input--error"] : ""}`}
+            {...register("email")} 
+            placeholder="example@mail.com"
+          />
+          {errors.email && <span className={styles["auth-form__error"]}>{errors.email.message}</span>}
+        </div>
 
-        <label>
-          Password
-          <input type="text" {...register("password")} />
-          {errors.password && (
-            <div className="error">{errors.password.message}</div>
-          )}
-        </label>
+        <div className={styles["auth-form__group"]}>
+          <label className={styles["auth-form__label"]}>Пароль</label>
+          <input 
+            type="password" 
+            className={`${styles["auth-form__input"]} ${errors.password ? styles["auth-form__input--error"] : ""}`}
+            {...register("password")} 
+            placeholder="••••••••"
+          />
+          {errors.password && <span className={styles["auth-form__error"]}>{errors.password.message}</span>}
+        </div>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button className={styles["auth-form__submit"]} type="submit">Зарегистрироваться</button>
       </form>
     </div>
   );

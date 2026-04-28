@@ -1,41 +1,53 @@
-import { Link } from "react-router";
 import { routePaths } from "../../config/routePaths";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootStata } from "../../../app/provider/store/store";
+import { useDispatch } from "react-redux";
 import { logout } from "../../../entities/auth/api/authSlice";
-import styles from "./index.module.scss"
-import { useLogoutMutation } from "../../../entities/auth/api/authApi";
-import { ELSNames } from "../../config/enums";
+import { Link, useLocation } from "react-router";
+import styles from './index.module.scss'
+import { useAppSelector } from "../../../app/provider/store/hooks";
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const { user, isAuth } = useSelector((state: RootStata) => state.auth);
-  const [logoutUser] = useLogoutMutation()
+  const location = useLocation();
+  const { user } = useAppSelector((state) => state.auth)
 
-  const logoutHandler = () => {
-    logoutUser({ accessToken: localStorage.getItem(ELSNames.ACCESS_TOKEN)! })
-    dispatch(logout())
-  }
+  const isActive = (path: string) => location.pathname === path ? styles["header__link--active"] : "";
 
   return (
-    <nav className={styles.nav}>
-      <Link to={routePaths.home}>Home</Link>
-      <Link to={routePaths.spaces}>Spaces</Link>
-
-      {user?.role === "manager" && <Link to={routePaths.manageBookings}>Manage Bookings</Link>}
-      {(user?.isActive && isAuth) && <Link to={routePaths.profile}>Profile</Link>}
-
-      {!isAuth && (
-        <>
-          <Link to={routePaths.register}>Register</Link>
-          <Link to={routePaths.login}>Login</Link>
-        </>
-      )}
-      {isAuth && (
-        <Link to={routePaths.login} onClick={logoutHandler}>
-          Logout
-        </Link>
-      )}
-    </nav>
+    <header className={styles.header}>
+      <nav className={styles.header__nav}>
+        {user ? (
+          <>
+            <Link 
+              to={routePaths.spaces}    
+              className={`${styles.header__link} ${isActive(routePaths.spaces)}`}
+            >
+              Spaces
+            </Link>
+            <Link 
+              to={routePaths.bookings} 
+              className={`${styles.header__link} ${isActive(routePaths.bookings)}`}
+            >
+              Bookings
+            </Link>
+            <Link 
+              to={routePaths.login} 
+              className={`${styles.header__link} ${styles["header__link--logout"]}`}
+              onClick={() => dispatch(logout())}
+            >
+              Logout ({user?.role || 'User'})
+            </Link>
+          </>
+        ) : (
+          <div className={styles["header__auth-group"]}>
+            <Link to={routePaths.register} className={styles.header__link}>
+              Register
+            </Link>
+            <Link to={routePaths.login} className={styles.header__link}>
+              Login
+            </Link>
+          </div>
+        )}
+      </nav>
+    </header>
   );
 };

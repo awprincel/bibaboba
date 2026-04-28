@@ -13,7 +13,7 @@ export const baseQuery = fetchBaseQuery({
     prepareHeaders: (headers) => {
         const token = localStorage.getItem(ELSNames.ACCESS_TOKEN);
         if (token) {
-            headers.set("authorization", `Bearer ${token}`)
+            headers.set("Authorization", `Bearer ${token}`)
         }
 
         return headers
