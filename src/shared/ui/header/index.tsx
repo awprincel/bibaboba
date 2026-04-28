@@ -17,6 +17,12 @@ export const Header = () => {
       <nav className={styles.header__nav}>
         {user ? (
           <>
+          <Link
+              to={routePaths.home}
+              className={`${styles.header__link} ${isActive(routePaths.home)}`}
+            >
+              Home
+            </Link>
             <Link
               to={routePaths.spaces}
               className={`${styles.header__link} ${isActive(routePaths.spaces)}`}

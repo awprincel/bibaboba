@@ -8,12 +8,10 @@
   justify-content: center;
   align-items: center;
   
-  // Убираем черный цвет, оставляем только прозрачность
   background-color: rgba(255, 255, 255, 0.05); 
   
-  // Эффект матового стекла (блюр)
   backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px); // Для поддержки в Safari
+  -webkit-backdrop-filter: blur(12px);
   
   z-index: 9999;
   transition: opacity 0.3s ease;
@@ -21,14 +19,11 @@
   &__spinner {
     width: 64px;
     height: 64px;
-    // Тонкий белый ободок
     border: 4px solid rgba(255, 255, 255, 0.2); 
-    // Яркая белая крутящаяся часть
     border-top: 4px solid #ffffff; 
     border-radius: 50%;
     animation: spin 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     
-    // Мягкое свечение вокруг круга
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
   }
 }
