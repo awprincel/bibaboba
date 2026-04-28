@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# 🚀 Coworking Booking App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Современное веб-приложение для поиска и бронирования рабочих пространств в коворкингах. Построено на архитектуре **FSD (Feature-Sliced Design)** для масштабируемости и удобства поддержки.
 
-Currently, two official plugins are available:
+## 🛠 Технологический стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend:** React 18 + TypeScript
+- **State Management:** Redux Toolkit + RTK Query (для работы с API)
+- **Forms & Validation:** React Hook Form + Zod
+- **Styling:** SCSS Modules + BEM (Dark Theme)
+- **Routing:** React Router 6
+- **Build Tool:** Vite
 
-## React Compiler
+## 📋 Функционал
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Для пользователей (Client/Guest):
+- **Авторизация:** Регистрация, логин и автоматическое обновление токенов (Refresh Token).
+- **Каталог:** Просмотр доступных пространств с фильтрацией.
+- **Бронирование:** Удобная форма выбора даты и времени с валидацией через Zod.
+- **Личный кабинет:** Просмотр своих бронирований и статусов.
 
-## Expanding the ESLint configuration
+### Для менеджеров (Manager):
+- **Управление пространствами:** Создание, редактирование и удаление зон (Open Space, Meeting Rooms).
+- **Модерация:** Подтверждение или отклонение заявок на бронирование в реальном времени.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🏗 Архитектура
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Проект следует методологии **Feature-Sliced Design**:
+- `app/` — инициализация стора, роутинга и глобальных стилей.
+- `pages/` — полные страницы приложения.
+- `widgets/` — крупные блоки (Header, списки).
+- `features/` — интерактивные действия (формы бронирования, логин, смена статуса).
+- `entities/` — бизнес-сущности (User, Space, Booking) и их API-слои.
+- `shared/` — переиспользуемые компоненты, API инстанс, конфиги и типы.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Запуск проекта
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Настройка Бэкенда
+Перейдите в директорию сервера и выполните установку:
+```bash
+cd back
+cp .env.example .env
+npm install
+npm run migrate
+npm run seed
+npm run dev
 ```
+*Сервер запустится на `http://localhost:3009`*
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Настройка Фронтенда
+В корневой директории проекта:
+```bash
+npm install
+npm run dev
 ```
+*Приложение откроется на `http://localhost:3000`*
+
+## 🔑 Тестовые аккаунты
+
+
+| Email | Password | Role |
+| :--- | :--- | :--- |
+| `manager@example.com` | `manager123` | **Manager** |
+| `client@example.com` | `client123` | **Client** |
+
+---
+Разработано с ❤️ любовю.
