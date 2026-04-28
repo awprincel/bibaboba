@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import styles from './index.module.scss'
 import { useAppDispatch } from "../../../../app/provider/store/hooks";
 import { setAuth } from "../../../../entities/auth/api/authSlice";
+import toast from "react-hot-toast";
 
 export const RegisterForm = () => {
   const [apiRegister] = useRegisterMutation();
@@ -32,25 +33,25 @@ export const RegisterForm = () => {
         accessToken: res.accessToken,
         refreshToken: res.refreshToken,
       }))
-      alert("успех");
+      toast.success("Успешная регистарция!")
       reset();
       navigate("/");
     } else {
-      alert("not");
+      toast.error("Ошибка регистрации!")
     }
   };
 
-return (
+  return (
     <div className={styles["auth-container"]}>
       <form className={styles["auth-form"]} onSubmit={handleSubmit(onSubmit)}>
         <h1 className={styles["auth-form__title"]}>Регистрация</h1>
 
         <div className={styles["auth-form__group"]}>
           <label className={styles["auth-form__label"]}>Имя пользователя</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             className={`${styles["auth-form__input"]} ${errors.name ? styles["auth-form__input--error"] : ""}`}
-            {...register("name")} 
+            {...register("name")}
             placeholder="Ivan Ivanov"
           />
           {errors.name && <span className={styles["auth-form__error"]}>{errors.name.message}</span>}
@@ -58,10 +59,10 @@ return (
 
         <div className={styles["auth-form__group"]}>
           <label className={styles["auth-form__label"]}>Email</label>
-          <input 
-            type="email" 
+          <input
+            type="email"
             className={`${styles["auth-form__input"]} ${errors.email ? styles["auth-form__input--error"] : ""}`}
-            {...register("email")} 
+            {...register("email")}
             placeholder="example@mail.com"
           />
           {errors.email && <span className={styles["auth-form__error"]}>{errors.email.message}</span>}
@@ -69,10 +70,10 @@ return (
 
         <div className={styles["auth-form__group"]}>
           <label className={styles["auth-form__label"]}>Пароль</label>
-          <input 
-            type="password" 
+          <input
+            type="password"
             className={`${styles["auth-form__input"]} ${errors.password ? styles["auth-form__input--error"] : ""}`}
-            {...register("password")} 
+            {...register("password")}
             placeholder="••••••••"
           />
           {errors.password && <span className={styles["auth-form__error"]}>{errors.password.message}</span>}

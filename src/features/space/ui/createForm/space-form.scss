@@ -1,0 +1,122 @@
+.space-form {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: #1a202c;
+  border: 1px solid #2d3748;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #a0aec0;
+    margin-left: 4px;
+  }
+
+  &__input,
+  &__select,
+  &__textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+    transition: all 0.2s ease;
+
+    &::placeholder {
+      color: #718096;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #3182ce;
+      box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+    }
+
+    &--error {
+      border-color: #e53e3e;
+      background-color: rgba(229, 62, 62, 0.1);
+    }
+  }
+
+  &__textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  &__error {
+    font-size: 13px;
+    color: #fc8181;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  &__submit {
+    margin-top: 12px;
+    padding: 14px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background-color: #2b6cb0;
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--loading {
+      position: relative;
+      color: transparent !important;
+      
+      &::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        left: 50%;
+        margin-top: -10px;
+        margin-left: -10px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: space-spin 0.8s linear infinite;
+      }
+    }
+  }
+}
+
+@keyframes space-spin {
+  to { transform: rotate(360deg); }
+}

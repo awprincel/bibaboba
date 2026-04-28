@@ -3,6 +3,7 @@ import { spaceSchema, type TSpaceSchema } from "../../model/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useUpdateSpaceMutation } from "../../../../entities/space/api/spacesApi"
 import type { ISpace } from "../../../../entities/space/model/types"
+import toast from "react-hot-toast"
 
 interface IUpdateSpaceFormProps {
     space: ISpace;
@@ -25,8 +26,16 @@ export const UpdateSpaceForm = ({ space, setShow }: IUpdateSpaceFormProps) => {
     })
 
     const submitHandler = (data: TSpaceSchema) => {
-        updateSpace({ id: space.id, data }).unwrap()
-        setShow(prev => !prev)
+        try {
+
+            updateSpace({ id: space.id, data }).unwrap()
+            setShow(prev => !prev)
+            toast.success("Успешно обновлено")
+        }
+        catch (e) {
+            console.log(e);
+            toast.error("Ошибка обновления")
+        }
     }
 
     return (
