@@ -1,10 +1,10 @@
 .booking-card {
-  border: 1px solid #2d3748; // Темная граница
+  border: 1px solid #2d3748;
   padding: 16px;
   margin: 16px;
   border-radius: 12px;
-  background-color: #1a202c; // Глубокий темный фон
-  color: #edf2f7; // Светлый текст
+  background-color: #1a202c;
+  color: #edf2f7;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
 
@@ -27,7 +27,7 @@
     font-size: 1.1rem;
     font-weight: 700;
     margin: 0;
-    color: #a0aec0; // Приглушенный светлый для ID
+    color: #a0aec0;
   }
 
   &__status {
@@ -38,7 +38,6 @@
     letter-spacing: 0.5px;
     text-transform: uppercase;
 
-    // Цвета статусов адаптированы под темный фон (более тусклые подложки)
     &--approved { background-color: rgba(72, 187, 120, 0.2); color: #68d391; }
     &--rejected { background-color: rgba(245, 101, 101, 0.2); color: #fc8181; }
     &--pending  { background-color: rgba(237, 137, 54, 0.2); color: #f6ad55; }
@@ -49,10 +48,10 @@
     margin: 10px 0;
     font-size: 15px;
     line-height: 1.5;
-    color: #cbd5e0; // Чуть менее яркий текст для описания
+    color: #cbd5e0;
 
     strong {
-      color: #718096; // Серый для подписей (Дата, Время)
+      color: #718096;
       margin-right: 6px;
       font-weight: 600;
     }
