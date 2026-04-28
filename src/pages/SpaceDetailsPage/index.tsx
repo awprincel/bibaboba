@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useGetSpaceQuery } from "../../entities/space/api/spacesApi";
 import { BookingsForm } from "../../features/booking/ui/bookingForm";
 
-export const SpaceDetailsPage = () => {
+const SpaceDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const spaceId = Number(id);
   
@@ -23,3 +23,5 @@ export const SpaceDetailsPage = () => {
     </div>
   );
 };
+
+export default SpaceDetailsPage

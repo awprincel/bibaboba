@@ -1,14 +1,14 @@
 import { routePaths } from "../../config/routePaths";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootStata } from "../../../app/provider/store/store";
+import { useDispatch } from "react-redux";
 import { logout } from "../../../entities/auth/api/authSlice";
 import { Link, useLocation } from "react-router";
 import styles from './index.module.scss'
+import { useAppSelector } from "../../../app/provider/store/hooks";
 
 export const Header = () => {
-  const { user } = useSelector((state: RootStata) => state.auth);
   const dispatch = useDispatch();
   const location = useLocation();
+  const { user } = useAppSelector((state) => state.auth)
 
   const isActive = (path: string) => location.pathname === path ? styles["header__link--active"] : "";
 
@@ -18,7 +18,7 @@ export const Header = () => {
         {user ? (
           <>
             <Link 
-              to={routePaths.spaces} 
+              to={routePaths.spaces}    
               className={`${styles.header__link} ${isActive(routePaths.spaces)}`}
             >
               Spaces
@@ -34,7 +34,7 @@ export const Header = () => {
               className={`${styles.header__link} ${styles["header__link--logout"]}`}
               onClick={() => dispatch(logout())}
             >
-              Logout ({user.user?.role || 'User'})
+              Logout ({user?.role || 'User'})
             </Link>
           </>
         ) : (

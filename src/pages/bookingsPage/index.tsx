@@ -1,5 +1,8 @@
 import { BookingsList } from "../../features/booking/ui/bookingsList"
 
-export const BookingsPage = () => {
+const BookingsPage = () => {
   return <BookingsList />
 }
+
+
+export default BookingsPage

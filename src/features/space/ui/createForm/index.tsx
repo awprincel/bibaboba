@@ -7,11 +7,28 @@ export const CreateSpaceForm = () => {
     const [createSpace] = useCreateSpaceMutation()
     const { control, handleSubmit, reset, formState: { errors } } = useForm<TSpaceSchema>({
         resolver: zodResolver(spaceSchema),
+        defaultValues: {
+            title: "",
+            capacity: undefined,
+            description: "",
+            images: undefined,
+            pricePerHour: undefined,
+            rating: undefined,
+            zoneType: "open-space"
+        }
     })
 
     const submitHandler = (data: TSpaceSchema) => {
         createSpace(data).unwrap()
-        reset()
+        reset({
+            title: "",
+            capacity: undefined,
+            description: "",
+            images: undefined,
+            pricePerHour: undefined,
+            rating: undefined,
+            zoneType: "open-space"
+        })
     }
 
     return (

@@ -5,9 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegisterMutation } from "../../../../entities/auth/api/authApi";
 import { useNavigate } from "react-router";
 import styles from './index.module.scss'
+import { useAppDispatch } from "../../../../app/provider/store/hooks";
+import { setAuth } from "../../../../entities/auth/api/authSlice";
 
 export const RegisterForm = () => {
   const [apiRegister] = useRegisterMutation();
+  const dispatch = useAppDispatch()
 
   const {
     register,
@@ -20,10 +23,15 @@ export const RegisterForm = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = (userData: TUserRegister) => {
-    const res = apiRegister(userData).unwrap();
+  const onSubmit = async (userData: TUserRegister) => {
+    const res = await apiRegister(userData).unwrap();
 
     if (res) {
+      dispatch(setAuth({
+        user: res.user,
+        accessToken: res.accessToken,
+        refreshToken: res.refreshToken,
+      }))
       alert("успех");
       reset();
       navigate("/");

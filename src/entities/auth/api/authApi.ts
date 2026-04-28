@@ -4,7 +4,6 @@ import type {
   TUserRegister,
   TUserResponse,
 } from "../model/index.types";
-import { setAuth } from "./authSlice";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -14,25 +13,6 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: userData,
       }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-
-          localStorage.setItem("user", JSON.stringify(data.user));
-          localStorage.setItem("accessToken", data.accessToken);
-          localStorage.setItem("refreshToken", data.refreshToken);
-
-          dispatch(
-            setAuth({
-              user: data,
-              accessToken: data.accessToken,
-              refreshToken: data.refreshToken,
-            }),
-          );
-        } catch (err) {
-          console.error(err);
-        }
-      },
       invalidatesTags: ["User"],
     }),
 
@@ -42,26 +22,6 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: userData,
       }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-
-          localStorage.setItem("user", JSON.stringify(data.user));
-          localStorage.setItem("accessToken", data.accessToken);
-          localStorage.setItem("refreshToken", data.refreshToken);
-
-          dispatch(
-            setAuth({
-              user: data,
-              accessToken: data.accessToken,
-              refreshToken: data.refreshToken,
-            }),
-          );
-        } catch (err) {
-          console.error(err);
-        }
-      },
-
       invalidatesTags: ["User"],
     }),
   }),

@@ -11,6 +11,10 @@ export enum ERoutePaths {
     SPACES = "spaces",
     SPACE = "space",
     BOOKINGS = "bookings",
+    MY_BOOKINGS = "myBookings",
+    MANAGE_BOOKINGS = "manageBookings",
     BOOKING = "booking",
+    REVIEWS = "reviews",
+    PROFILE = "profile",
     NOT_FOUND = "notFound",
 }

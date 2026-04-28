@@ -8,7 +8,7 @@ export const BookingCard = ({ booking }: TBookingCardProps) => {
   const auth = useSelector((state: RootStata) => state.auth);
   const [updateStatus] = useUpdateBookingStatusMutation();
 
-  const isManager = auth.user?.user?.role === "manager";
+  const isManager = auth.user?.role === "manager";
 
   const handleStatusChange = async (newStatus: "approved" | "rejected") => {
     try {
