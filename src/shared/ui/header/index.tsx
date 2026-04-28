@@ -17,20 +17,26 @@ export const Header = () => {
       <nav className={styles.header__nav}>
         {user ? (
           <>
-            <Link 
-              to={routePaths.spaces}    
+            <Link
+              to={routePaths.spaces}
               className={`${styles.header__link} ${isActive(routePaths.spaces)}`}
             >
               Spaces
             </Link>
-            <Link 
-              to={routePaths.bookings} 
+            <Link
+              to={routePaths.bookings}
               className={`${styles.header__link} ${isActive(routePaths.bookings)}`}
             >
               Bookings
             </Link>
-            <Link 
-              to={routePaths.login} 
+            <Link
+              to={routePaths.profile}
+              className={`${styles.header__link} ${isActive(routePaths.profile)}`}
+            >
+              Profile
+            </Link>
+            <Link
+              to={routePaths.login}
               className={`${styles.header__link} ${styles["header__link--logout"]}`}
               onClick={() => dispatch(logout())}
             >

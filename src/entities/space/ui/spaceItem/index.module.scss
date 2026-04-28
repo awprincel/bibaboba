@@ -43,10 +43,31 @@
     margin: 4px 0;
   }
 
-  &__btn {
+  &__btn_reject {
+    margin-top: 8px;
+    background-color: #e53e3e;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+
+    &:hover {
+      background-color: #d32424;
+      box-shadow: 0 0 12px #901515;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+  }
+
+  &__btn_primary {
     margin-top: 8px;
     background-color: #3182ce;
-    color: white;
     border: none;
     padding: 12px;
     border-radius: 8px;
