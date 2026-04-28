@@ -1,0 +1,88 @@
+.booking-card {
+  border: 1px solid #2d3748; // Темная граница
+  padding: 16px;
+  margin: 16px;
+  border-radius: 12px;
+  background-color: #1a202c; // Глубокий темный фон
+  color: #edf2f7; // Светлый текст
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    border-color: #4a5568;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #2d3748;
+    padding-bottom: 8px;
+  }
+
+  &__id {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #a0aec0; // Приглушенный светлый для ID
+  }
+
+  &__status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    // Цвета статусов адаптированы под темный фон (более тусклые подложки)
+    &--approved { background-color: rgba(72, 187, 120, 0.2); color: #68d391; }
+    &--rejected { background-color: rgba(245, 101, 101, 0.2); color: #fc8181; }
+    &--pending  { background-color: rgba(237, 137, 54, 0.2); color: #f6ad55; }
+    &--cancelled { background-color: rgba(160, 174, 192, 0.2); color: #a0aec0; }
+  }
+
+  &__info {
+    margin: 10px 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #cbd5e0; // Чуть менее яркий текст для описания
+
+    strong {
+      color: #718096; // Серый для подписей (Дата, Время)
+      margin-right: 6px;
+      font-weight: 600;
+    }
+  }
+
+  &__actions {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid #2d3748;
+    padding-top: 12px;
+  }
+
+  &__btn {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+
+    &:active {
+        transform: scale(0.98);
+    }
+
+    &:hover { filter: brightness(110%); }
+
+    &--approve { background-color: #38a169; color: white; }
+    &--reject { background-color: #e53e3e; color: white; }
+  }
+}

@@ -1,57 +1,70 @@
 import { baseApi } from "../../../shared/api/baseApi";
-import type { TUserLogin, TUserRegister, TUserResponse } from "../model/index.types";
+import type {
+  TUserLogin,
+  TUserRegister,
+  TUserResponse,
+} from "../model/index.types";
 import { setAuth } from "./authSlice";
 
 const authApi = baseApi.injectEndpoints({
-    endpoints: (builder) => ({
-        register: builder.mutation<TUserResponse, TUserRegister>({
-            query: (userData) => ({
-                url: '/auth/register',
-                method: 'POST',
-                body: userData
+  endpoints: (builder) => ({
+    register: builder.mutation<TUserResponse, TUserRegister>({
+      query: (userData) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: userData,
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("accessToken", data.accessToken);
+          localStorage.setItem("refreshToken", data.refreshToken);
+
+          dispatch(
+            setAuth({
+              user: data,
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken,
             }),
-            async onQueryStarted(_, {dispatch, queryFulfilled}) {
-                try {
-                    const { data } = await queryFulfilled
-                    localStorage.setItem('user', JSON.stringify(data));
+          );
+        } catch (err) {
+          console.error(err);
+        }
+      },
+      invalidatesTags: ["User"],
+    }),
 
-                    dispatch(setAuth({
-                        user: data,
-                        accessToken: data.accessToken,
-                        refreshToken: data.refreshToken
-                    }));
-                } catch (err) {
-                    console.error(err)
-                }
-            },
-            invalidatesTags: ['User']
-        }),
+    login: builder.mutation<TUserResponse, TUserLogin>({
+      query: (userData) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: userData,
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
 
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("accessToken", data.accessToken);
+          localStorage.setItem("refreshToken", data.refreshToken);
 
-        login: builder.mutation<TUserResponse, TUserLogin>({
-            query: (userData) => ({
-                url: '/auth/login',
-                method: 'POST',
-                body: userData
+          dispatch(
+            setAuth({
+              user: data,
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken,
             }),
-            async onQueryStarted(_, {dispatch, queryFulfilled}) {
-                try {
-                    const { data } = await queryFulfilled
-                    localStorage.setItem('user', JSON.stringify(data));
+          );
+        } catch (err) {
+          console.error(err);
+        }
+      },
 
-                    dispatch(setAuth({
-                        user: data,
-                        accessToken: data.accessToken,
-                        refreshToken: data.refreshToken
-                    }));
-                } catch (err) {
-                    console.error(err)
-                }
-            },
-            invalidatesTags: ['User']
-        })
-    })
-})
+      invalidatesTags: ["User"],
+    }),
+  }),
+});
 
-
-export const { useLoginMutation, useRegisterMutation } = authApi
+export const { useLoginMutation, useRegisterMutation } = authApi;

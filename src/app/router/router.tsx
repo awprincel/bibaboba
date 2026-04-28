@@ -2,11 +2,14 @@ import { createBrowserRouter } from "react-router";
 import { Layout } from "../layout";
 import { routePaths } from "../../shared/config/routePaths";
 import { lazy } from "react";
+import { BookingsList } from "../../features/booking/ui/bookingsList";
+import { RegisterPage } from "../../pages/registerPage";
+import { LoginPage } from "../../pages/loginPage";
+import { SpaceDetailsPage } from "../../pages/SpaceDetailsPage";
 
 const HomePage = lazy(() => import("../../pages/home"))
 const NotFoundPage = lazy(() => import("../../pages/notFound"))
 const SpacesPage = lazy(() => import("../../pages/spaces/allSpaces"))
-const SpacePage = lazy(() => import("../../pages/spaces/oneSpace"))
 
 export const router = createBrowserRouter([
     {
@@ -23,8 +26,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: routePaths.space,
-                element: <SpacePage />
+                element: <SpaceDetailsPage />
             },
+
+            {
+                path: routePaths.bookings,
+                element: <BookingsList />
+            },
+
+            {
+                path: routePaths.register,
+                element: <RegisterPage />
+            },
+            {
+                path: routePaths.login,
+                element: <LoginPage />
+            },
+
             {
                 path: routePaths.notFound,
                 element: <NotFoundPage />

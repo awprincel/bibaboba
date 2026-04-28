@@ -1,19 +1,34 @@
-import type { ISpace } from "../../model/types"
+import { useNavigate } from "react-router";
+import type { ISpace } from "../../model/types";
+import styles from './index.module.scss'
 
 interface ISpaceItemProps {
-    space: ISpace
+    space: ISpace;
 }
 
 export const SpaceItem = ({ space }: ISpaceItemProps) => {
+    const navigate = useNavigate();
 
     return (
-        <div>
-            <h2>Название: {space.title}</h2>
-            <h2>Рейтинг: {space.rating}</h2>
-            <h2>Цена за час: {space.pricePerHour}</h2>
-            <p>Описание: {space.description}</p>
-            <h2>Емкость: {space.capacity}</h2>
-            <h2></h2>
+        <div className={styles["space-item"]}>
+            <h2 className={styles["space-item__title"]}>{space.title}</h2>
+            
+            <p className={styles["space-item__price"]}>
+                Цена за час: <span>{space.pricePerHour} ₽</span>
+            </p>
+            
+            {space.description && (
+                <p className={styles["space-item__description"]}>
+                    {space.description}
+                </p>
+            )}
+
+            <button 
+                className={styles["space-item__btn"]}
+                onClick={() => navigate(`/spaces/${space.id}`)}
+            >
+                Забронировать
+            </button>
         </div>
-    )
-}
+    );
+};
