@@ -1,6 +1,6 @@
-const SpacePage = () => {
+const SpaceDetailsPage = () => {
     return (
-        <div>SpacePage</div>
+        <div>SpaceDetailsPage </div>
     )
 }
-export default SpacePage
+export default SpaceDetailsPage 

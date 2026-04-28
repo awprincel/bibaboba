@@ -1,5 +1,7 @@
 import { RegisterForm } from "../../features/auth/ui/registerForm"
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   return <RegisterForm />
 }
+
+export default RegisterPage

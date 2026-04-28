@@ -2,6 +2,7 @@ import { fetchBaseQuery, type BaseQueryFn, type FetchArgs, type FetchBaseQueryEr
 import { BASE_URL } from "../config/consts";
 import { ELSNames } from "../config/enums";
 import { createApi } from "@reduxjs/toolkit/query/react";
+import { logout, setToken } from "../../entities/auth/api/authSlice";
 
 interface RefreshResult {
     accessToken: string
@@ -32,13 +33,22 @@ export const baseQueryWithRefetch: BaseQueryFn<FetchArgs | string, unknown, Fetc
                 body: { refreshToken }
             }, api, extraOptions)
 
-            if (!resultRefresh.error) {
+            if (!resultRefresh.error && resultRefresh.data) {
                 const newAccessToken = (resultRefresh.data as RefreshResult).accessToken
                 if (newAccessToken) {
                     localStorage.setItem(ELSNames.ACCESS_TOKEN, newAccessToken)
+                    api.dispatch(setToken(newAccessToken))
                     result = await baseQuery(args, api, extraOptions)
                 }
             }
+            else {
+                window.location.href = "/auth/login"
+                api.dispatch(logout())
+            }
+        }
+        else {
+            window.location.href = "/auth/login"
+            api.dispatch(logout())
         }
     }
 
