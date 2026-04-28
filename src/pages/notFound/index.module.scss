@@ -1,0 +1,92 @@
+.not-found {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #1a202c 0%, #0f1219 100%);
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  padding: 20px;
+
+  &__bg-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(49, 130, 206, 0.15);
+    filter: blur(100px);
+    border-radius: 50%;
+    z-index: 0;
+    animation: float-slow 10s infinite alternate;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    animation: fade-up 0.8s ease-out;
+  }
+
+  &__code {
+    font-size: clamp(120px, 20vw, 240px);
+    font-weight: 900;
+    line-height: 1;
+    margin: 0;
+    background: linear-gradient(180deg, #ffffff 30%, #3182ce 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 30px rgba(49, 130, 206, 0.3));
+    animation: glitch 3s infinite;
+  }
+
+  &__title {
+    font-size: 32px;
+    color: #ffffff;
+    margin: 20px 0 10px;
+    letter-spacing: 1px;
+  }
+
+  &__text {
+    font-size: 18px;
+    color: #718096;
+    max-width: 450px;
+    margin-bottom: 40px;
+  }
+
+  &__btn {
+    padding: 16px 48px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+    background: linear-gradient(90deg, #3182ce, #63b3ed);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px rgba(49, 130, 206, 0.3);
+
+    &:hover {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 0 15px 30px rgba(49, 130, 206, 0.5);
+    }
+  }
+}
+
+@keyframes float-slow {
+  from { transform: translate(-20%, -20%); }
+  to { transform: translate(20%, 20%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: none; }
+  7% { transform: skew(-2deg, -1deg); }
+  10% { transform: skew(3deg, 1deg); }
+  15% { transform: none; }
+}
